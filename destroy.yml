@@ -1,0 +1,15 @@
+---
+
+- name: Terminate the Ansible Demo EC2 Instances 
+  hosts: tag_Name_Demo_with_Ansible
+  connection: local
+  vars:
+    region: "us-east-1"
+
+  tasks:
+    - name: terminate Instances
+      local_action:
+        module: ec2
+        state: 'absent'
+        instance_ids: "{{ hostvars[inventory_hostname]['ec2_id'] }}"
+        region: "{{ region }}"
